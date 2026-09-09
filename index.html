@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boticário Leidiane — Revenda O Boticário</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* =====================================================================
+     ESTILO — tudo embutido aqui dentro para nunca "descolar" do HTML.
+     ===================================================================== */
+  :root {
+    --bordo: #5C1A2E;
+    --bordo-escuro: #3E1120;
+    --rosa-po: #F3E4DC;
+    --marfim: #FBF6F1;
+    --carvao: #2A1A1E;
+    --dourado: #A8793D;
+    --borda: #E6D3C6;
+    --fonte-titulo: "Fraunces", "Georgia", serif;
+    --fonte-corpo: "Manrope", "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--marfim);
+    color: var(--carvao);
+    font-family: var(--fonte-corpo);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+
+  h1, h2, h3 {
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .container { width: min(1100px, 92%); margin-inline: auto; }
+
+  /* ---------- Cabeçalho ---------- */
+
+  .cabecalho {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(251, 246, 241, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--borda);
+  }
+
+  .cabecalho__conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1.1rem;
+  }
+
+  .marca {
+    font-family: var(--fonte-titulo);
+    font-size: 1.3rem;
+    color: var(--bordo);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-principal {
+    display: flex;
+    gap: 1.8rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-principal a {
+    position: relative;
+    text-decoration: none;
+    font-size: 0.95rem;
+    color: var(--carvao);
+    padding-bottom: 3px;
+  }
+
+  .nav-principal a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--dourado);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.28s ease;
+  }
+
+  .nav-principal a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  .cabecalho__acoes { display: flex; align-items: center; gap: 0.9rem; }
+
+  /* ---------- Botões ---------- */
+
+  .botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.7rem;
+    background: var(--bordo);
+    color: var(--marfim);
+    text-decoration: none;
+    border-radius: 3px;
+    font-family: var(--fonte-corpo);
+    font-size: 0.95rem;
+    border: 1px solid var(--bordo);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
+  }
+
+  .botao:hover { background: var(--bordo-escuro); box-shadow: 0 8px 18px -10px rgba(60,20,30,0.5); }
+  .botao:active { transform: scale(0.96); }
+
+  .botao--fantasma { background: transparent; color: var(--bordo); }
+  .botao--fantasma:hover { background: var(--bordo); color: var(--marfim); }
+
+  .botao--pequeno { padding: 0.5rem 1rem; font-size: 0.85rem; border-radius: 2px; }
+
+  .botao--whatsapp {
+    width: 100%;
+    background: #25D366;
+    border-color: #25D366;
+    color: #fff;
+    font-weight: 600;
+  }
+  .botao--whatsapp:hover:not(:disabled) { background: #1fb959; border-color: #1fb959; }
+  .botao--whatsapp:disabled { background: #cfc4c1; border-color: #cfc4c1; color: #fff; cursor: not-allowed; box-shadow: none; }
+
+  .botao-texto {
+    width: 100%;
+    margin-top: 0.7rem;
+    background: none;
+    border: none;
+    color: #8a7176;
+    font-family: var(--fonte-corpo);
+    font-size: 0.85rem;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0.3rem;
+    transition: color 0.2s ease;
+  }
+  .botao-texto:hover { color: var(--bordo); }
+
+  .botao-carrinho {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--borda);
+    background: #fff;
+    color: var(--bordo);
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.15s ease;
+  }
+  .botao-carrinho:hover { border-color: var(--dourado); transform: translateY(-1px); }
+  .botao-carrinho:active { transform: scale(0.92); }
+
+  .botao-carrinho__badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: var(--dourado);
+    color: #fff;
+    font-size: 0.72rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  @keyframes pulso {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.35); }
+    100% { transform: scale(1); }
+  }
+  .botao-carrinho__badge--pulso { animation: pulso 0.35s ease; }
+
+  /* ---------- Hero ---------- */
+
+  .hero { padding-block: 5.5rem 4rem; overflow: hidden; border-bottom: 1px solid var(--borda); }
+
+  .hero__grade { max-width: 62ch; }
+
+  .hero__regua {
+    width: 56px;
+    height: 2px;
+    background: var(--dourado);
+    margin-bottom: 1.4rem;
+  }
+
+  .anima-entrada {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: entrada 0.7s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .anima-entrada--atraso1 { animation-delay: 0.12s; }
+  .anima-entrada--atraso2 { animation-delay: 0.24s; }
+
+  @keyframes entrada {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero__eyebrow { color: var(--dourado); font-size: 0.95rem; margin-bottom: 0.9rem; display: block; letter-spacing: 0.02em; }
+  .hero__titulo { font-size: clamp(2.6rem, 4.6vw, 4rem); color: var(--bordo); max-width: 16ch; }
+  .hero__texto { margin-top: 1.2rem; max-width: 50ch; font-size: 1.08rem; color: #4a3a3e; }
+  .hero__acoes { display: flex; gap: 1rem; margin-top: 2.2rem; flex-wrap: wrap; }
+
+  /* ---------- Selos ---------- */
+
+  .selos { border-top: 1px solid var(--borda); border-bottom: 1px solid var(--borda); padding-block: 1.6rem; }
+  .selos__lista {
+    display: flex; flex-wrap: wrap; gap: 1.6rem 2.4rem; justify-content: space-between;
+    list-style: none; margin: 0; padding: 0; font-size: 0.92rem; color: #5a464b;
+  }
+  .selos__lista li { display: flex; align-items: center; gap: 0.6rem; }
+  .selos__ponto { width: 7px; height: 7px; border-radius: 50%; background: var(--dourado); flex-shrink: 0; }
+
+  /* ---------- Seções ---------- */
+
+  .secao { padding-block: 4rem; }
+  .secao__cabecalho { max-width: 60ch; margin-bottom: 2.4rem; }
+  .secao__titulo { font-size: clamp(1.8rem, 3vw, 2.3rem); color: var(--bordo); }
+  .secao__texto { margin-top: 0.8rem; color: #5a464b; }
+
+  /* ---------- Sobre ---------- */
+
+  .sobre { background: var(--rosa-po); }
+  .sobre__grade { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center; }
+  .sobre__lista { list-style: none; margin: 1.4rem 0 0; padding: 0; display: grid; gap: 0.9rem; }
+  .sobre__lista li { display: flex; gap: 0.7rem; color: #4a3a3e; }
+  .sobre__lista svg { flex-shrink: 0; margin-top: 0.2rem; }
+
+  .sobre__destaque {
+    border-left: 3px solid var(--bordo);
+    padding: 0.4rem 0 0.4rem 1.6rem;
+  }
+  .sobre__destaque p {
+    font-family: var(--fonte-titulo);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--bordo);
+    line-height: 1.3;
+    margin: 0;
+  }
+  .sobre__destaque span {
+    display: block;
+    margin-top: 0.9rem;
+    font-family: var(--fonte-corpo);
+    font-style: normal;
+    font-size: 0.85rem;
+    color: #6b5a5e;
+  }
+
+  /* ---------- Catálogo ---------- */
+
+  .catalogo__topo { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; }
+  .filtros { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+  .filtro {
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--borda);
+    background: transparent;
+    font-family: var(--fonte-corpo);
+    font-size: 0.88rem;
+    color: var(--carvao);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filtro:hover { border-color: var(--dourado); transform: translateY(-1px); }
+  .filtro--ativo { background: var(--bordo); border-color: var(--bordo); color: var(--marfim); }
+
+  .grade-produtos {
+    margin-top: 2.2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.6rem;
+  }
+
+  .card-produto {
+    background: #fff;
+    border: 1px solid var(--borda);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  }
+  .card-produto:hover {
+    box-shadow: 0 18px 34px -20px rgba(60, 20, 30, 0.45);
+    transform: translateY(-4px);
+    border-color: var(--dourado);
+  }
+
+  .card-produto__imagem { position: relative; aspect-ratio: 1 / 1; background: var(--rosa-po); overflow: hidden; }
+  .card-produto__imagem img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .card-produto:hover .card-produto__imagem img { transform: scale(1.07); }
+  .card-produto__imagem--placeholder { object-fit: contain; padding: 1rem; }
+
+  .card-produto__etiqueta {
+    position: absolute; top: 0.7rem; left: 0.7rem;
+    background: var(--dourado); color: #fff; font-size: 0.75rem;
+    padding: 0.3rem 0.7rem; border-radius: 999px;
+  }
+
+  .card-produto__corpo { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; gap: 0.35rem; flex-grow: 1; }
+  .card-produto__categoria { font-size: 0.78rem; color: var(--dourado); }
+  .card-produto__nome { font-size: 1.15rem; color: var(--carvao); }
+  .card-produto__descricao { font-size: 0.9rem; color: #6b5a5e; margin: 0; flex-grow: 1; }
+  .card-produto__preco { font-family: var(--fonte-titulo); font-size: 1.25rem; color: var(--bordo); margin-top: 0.2rem; }
+
+  .card-produto__acao { margin-top: 0.9rem; display: flex; align-items: center; gap: 0.6rem; }
+  .card-produto__acao .botao { flex-grow: 1; }
+  .card-produto__no-carrinho { margin-top: 0.6rem; font-size: 0.8rem; color: var(--dourado); }
+
+  .seletor-quantidade {
+    display: inline-flex; align-items: center; border: 1px solid var(--borda);
+    border-radius: 3px; overflow: hidden; flex-shrink: 0;
+  }
+  .seletor-quantidade__botao {
+    width: 32px; height: 36px; border: none; background: var(--marfim);
+    color: var(--bordo); font-size: 1.05rem; cursor: pointer; line-height: 1;
+    transition: background 0.15s ease;
+  }
+  .seletor-quantidade__botao:hover { background: var(--rosa-po); }
+  .seletor-quantidade__botao:active { transform: scale(0.9); }
+  .seletor-quantidade__valor { min-width: 26px; text-align: center; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+  .seletor-quantidade--pequeno .seletor-quantidade__botao { width: 26px; height: 28px; font-size: 0.9rem; }
+
+  .catalogo-vazio {
+    text-align: center; padding: 3rem 1rem; color: #6b5a5e;
+    border: 1px dashed var(--borda); border-radius: 6px; margin-top: 2rem;
+  }
+
+  /* ---------- Como comprar ---------- */
+
+  .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 2.2rem; }
+  .passo {
+    background: #fff; border: 1px solid var(--borda); border-radius: 4px; padding: 1.6rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .passo:hover { transform: translateY(-3px); box-shadow: 0 14px 26px -18px rgba(60,20,30,0.35); }
+  .passo__numero { font-family: var(--fonte-titulo); font-size: 1.6rem; color: var(--dourado); }
+  .passo__titulo { margin-top: 0.6rem; font-size: 1.05rem; color: var(--bordo); }
+  .passo__texto { margin-top: 0.4rem; font-size: 0.92rem; color: #5a464b; }
+
+  /* ---------- Rodapé ---------- */
+
+  .rodape { background: var(--bordo-escuro); color: var(--rosa-po); padding-block: 2.6rem; margin-top: 2rem; }
+  .rodape__grade { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.2rem; }
+  .rodape__marca { font-family: var(--fonte-titulo); font-size: 1.2rem; color: #fff; }
+  .rodape__links { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; font-size: 0.9rem; }
+  .rodape__links a { text-decoration: none; color: var(--rosa-po); transition: color 0.2s ease; }
+  .rodape__links a:hover { color: #fff; }
+
+  /* ---------- Carrinho (painel lateral) ---------- */
+
+  .fundo-carrinho {
+    position: fixed; inset: 0; background: rgba(42, 26, 30, 0.45);
+    opacity: 0; transition: opacity 0.25s ease; z-index: 40;
+  }
+  .fundo-carrinho--visivel { opacity: 1; }
+
+  .painel-carrinho {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(400px, 100%);
+    background: #fff; z-index: 41; display: flex; flex-direction: column;
+    transform: translateX(100%); transition: transform 0.32s cubic-bezier(.22,1,.36,1);
+    box-shadow: -18px 0 40px -20px rgba(42, 26, 30, 0.4);
+  }
+  .painel-carrinho--aberto { transform: translateX(0); }
+
+  .painel-carrinho__cabecalho {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.3rem 1.4rem; border-bottom: 1px solid var(--borda);
+  }
+  .painel-carrinho__cabecalho h2 { font-family: var(--fonte-titulo); font-size: 1.3rem; color: var(--bordo); }
+  .painel-carrinho__cabecalho button {
+    background: none; border: none; font-size: 1.6rem; line-height: 1;
+    color: var(--carvao); cursor: pointer; padding: 0.2rem 0.4rem; transition: color 0.2s ease;
+  }
+  .painel-carrinho__cabecalho button:hover { color: var(--bordo); }
+
+  .lista-carrinho { list-style: none; margin: 0; padding: 0.6rem 1.4rem; overflow-y: auto; flex-grow: 1; }
+
+  .item-carrinho {
+    display: grid; grid-template-columns: 52px 1fr auto auto; align-items: center;
+    gap: 0.8rem; padding: 0.9rem 0; border-bottom: 1px solid var(--borda);
+    animation: entrada 0.35s ease;
+  }
+  .item-carrinho img { width: 52px; height: 52px; object-fit: cover; border-radius: 3px; background: var(--rosa-po); }
+  .item-carrinho__info { min-width: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+  .item-carrinho__nome { margin: 0; font-size: 0.92rem; color: var(--carvao); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .item-carrinho__preco { font-size: 0.78rem; color: #8a7176; }
+  .item-carrinho__subtotal { font-size: 0.9rem; color: var(--bordo); font-family: var(--fonte-titulo); white-space: nowrap; }
+  .item-carrinho__remover {
+    background: none; border: none; font-size: 1.3rem; color: #b6a3a8;
+    cursor: pointer; line-height: 1; padding: 0.2rem; transition: color 0.2s ease;
+  }
+  .item-carrinho__remover:hover { color: var(--bordo); }
+
+  .carrinho-vazio { padding: 2.5rem 1.4rem; text-align: center; color: #8a7176; font-size: 0.92rem; }
+
+  .painel-carrinho__rodape { padding: 1.2rem 1.4rem 1.5rem; border-top: 1px solid var(--borda); }
+  .painel-carrinho__total {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.9rem; font-size: 0.95rem; color: var(--carvao);
+  }
+  .painel-carrinho__total strong { font-family: var(--fonte-titulo); font-size: 1.4rem; color: var(--bordo); }
+
+  /* ---------- Responsivo ---------- */
+
+  @media (max-width: 780px) {
+    .sobre__grade { grid-template-columns: 1fr; }
+    .sobre__destaque { border-left: none; border-top: 3px solid var(--bordo); padding: 1.2rem 0 0; }
+    .passos { grid-template-columns: 1fr; }
+    .nav-principal { display: none; }
+    .selos__lista { justify-content: flex-start; }
+    .cabecalho__acoes .botao--fantasma { display: none; }
+    .painel-carrinho { width: 100%; }
+  }
+
+  /* ---------- Acessibilidade ---------- */
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--dourado); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="cabecalho">
+  <div class="container cabecalho__conteudo">
+    <a href="#topo" class="marca" data-loja-nome>Boticário da Tia</a>
+    <nav aria-label="Navegação principal">
+      <ul class="nav-principal">
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#como-comprar">Como comprar</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <div class="cabecalho__acoes">
+      <a class="botao botao--fantasma botao--pequeno" data-loja-whatsapp-link href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <button id="botao-carrinho" class="botao-carrinho" type="button" aria-label="Abrir carrinho">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="19" cy="21" r="1"></circle>
+          <path d="M2.5 3h2l2.68 12.39a2 2 0 0 0 2 1.61h8.64a2 2 0 0 0 2-1.61L21.5 8H6"></path>
+        </svg>
+        <span id="badge-carrinho" class="botao-carrinho__badge" hidden>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="topo">
+
+  <section class="hero">
+    <div class="container hero__grade">
+      <div class="hero__regua anima-entrada"></div>
+      <span class="hero__eyebrow anima-entrada">Revenda oficial O Boticário</span>
+      <h1 class="hero__titulo anima-entrada anima-entrada--atraso1">Perfumes que contam quem você é</h1>
+      <p class="hero__texto anima-entrada anima-entrada--atraso1" data-loja-frase>
+        Perfumaria e cuidados O Boticário, direto de quem entende do assunto.
+      </p>
+      <div class="hero__acoes anima-entrada anima-entrada--atraso2">
+        <a href="#catalogo" class="botao">Ver catálogo</a>
+        <a href="#como-comprar" class="botao botao--fantasma">Como funciona a compra</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="selos">
+    <div class="container">
+      <ul class="selos__lista">
+        <li><span class="selos__ponto"></span> Produtos 100% originais O Boticário</li>
+        <li><span class="selos__ponto"></span> Combinado direto pelo WhatsApp</li>
+        <li><span class="selos__ponto"></span> Retirada em <span data-loja-cidade>Acopiara, CE</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="sobre" class="secao sobre">
+    <div class="container sobre__grade">
+      <div>
+        <h2 class="secao__titulo">Uma revenda de confiança</h2>
+        <p class="secao__texto">
+          Cada produto do catálogo é escolhido e vendido pessoalmente, com o cuidado
+          de quem gosta do que faz. Sem intermediário, sem letra miúda: você escolhe
+          o perfume, conversa direto pelo WhatsApp e combina a entrega.
+        </p>
+        <ul class="sobre__lista">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#A8793D" stroke-width="1.4"/><path d="M5.5 9.2l2.3 2.3 4.7-5" stroke="#A8793D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Atendimento pessoal, sem robô nem fila de espera
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#A8793D" stroke-width="1.4"/><path d="M5.5 9.2l2.3 2.3 4.7-5" stroke="#A8793D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Catálogo atualizado com frequência
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#A8793D" stroke-width="1.4"/><path d="M5.5 9.2l2.3 2.3 4.7-5" stroke="#A8793D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Pagamento combinado direto com a vendedora
+          </li>
+        </ul>
+      </div>
+      <div class="sobre__destaque">
+        <p>"Cada perfume é escolhido a dedo, como se fosse pra mim."</p>
+        <span data-loja-nome>Boticário da Tia</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalogo" class="secao">
+    <div class="container">
+      <div class="catalogo__topo">
+        <div class="secao__cabecalho" style="margin-bottom:0">
+          <h2 class="secao__titulo">Catálogo</h2>
+          <p class="secao__texto"><span id="contador-produtos">0</span> produtos disponíveis agora</p>
+        </div>
+        <div id="filtros-categoria" class="filtros" role="group" aria-label="Filtrar por categoria"></div>
+      </div>
+
+      <div id="grade-produtos" class="grade-produtos"></div>
+      <p id="catalogo-vazio" class="catalogo-vazio" hidden>
+        Nenhum produto cadastrado ainda. Procure "LISTA DE PRODUTOS" no código deste arquivo para adicionar o primeiro.
+      </p>
+    </div>
+  </section>
+
+  <section id="como-comprar" class="secao" style="background:var(--marfim)">
+    <div class="container">
+      <div class="secao__cabecalho">
+        <h2 class="secao__titulo">Como comprar</h2>
+        <p class="secao__texto">Três passos simples, do catálogo até a sua porta.</p>
+      </div>
+      <div class="passos">
+        <div class="passo">
+          <span class="passo__numero">1</span>
+          <h3 class="passo__titulo">Monte seu pedido</h3>
+          <p class="passo__texto">Escolha a quantidade de cada perfume e clique em "Adicionar" no catálogo.</p>
+        </div>
+        <div class="passo">
+          <span class="passo__numero">2</span>
+          <h3 class="passo__titulo">Revise o carrinho</h3>
+          <p class="passo__texto">Abra o carrinho, confira os itens, quantidades e o valor total.</p>
+        </div>
+        <div class="passo">
+          <span class="passo__numero">3</span>
+          <h3 class="passo__titulo">Envie no WhatsApp</h3>
+          <p class="passo__texto">Clique em "Fazer pedido" e a lista completa já vai pronta na mensagem.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contato" class="rodape">
+  <div class="container rodape__grade">
+    <span class="rodape__marca" data-loja-nome>Boticário Leidiane</span>
+    <ul class="rodape__links">
+      <li><a data-loja-whatsapp-link href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+      <li><a data-loja-instagram-link href="#" target="_blank" rel="noopener">Instagram</a></li>
+      <li><span data-loja-cidade>Acopiara, CE</span></li>
+    </ul>
+  </div>
+</footer>
+
+<div id="fundo-carrinho" class="fundo-carrinho" hidden></div>
+
+<aside id="painel-carrinho" class="painel-carrinho" aria-label="Carrinho de compras">
+  <div class="painel-carrinho__cabecalho">
+    <h2>Seu carrinho</h2>
+    <button id="fechar-carrinho" type="button" aria-label="Fechar carrinho">&times;</button>
+  </div>
+
+  <ul id="lista-carrinho" class="lista-carrinho"></ul>
+
+  <p id="carrinho-vazio" class="carrinho-vazio" hidden>
+    Seu carrinho está vazio. Escolha os perfumes no catálogo e clique em "Adicionar".
+  </p>
+
+  <div class="painel-carrinho__rodape">
+    <div class="painel-carrinho__total">
+      <span>Total</span>
+      <strong id="total-carrinho">R$ 0,00</strong>
+    </div>
+    <button id="botao-fazer-pedido" class="botao botao--whatsapp" type="button" disabled>
+      Fazer pedido no WhatsApp
+    </button>
+    <button id="limpar-carrinho" class="botao-texto" type="button" hidden>Esvaziar carrinho</button>
+  </div>
+</aside>
+
+<script>
+/* =========================================================================
+   PARTE 1 — DADOS DA LOJA E DOS PRODUTOS
+   -------------------------------------------------------------------------
+   É AQUI que você cadastra, edita ou remove os perfumes. Não precisa
+   mexer em mais nada neste arquivo para manter a loja.
+   ========================================================================= */
+
+/* Dados da loja: nome, frase, WhatsApp (só números, com 55 + DDD),
+   Instagram e cidade. */
+const loja = {
+  nome: "Boticário Leidiane",
+  frase: "Perfumaria e cuidados O Boticário, direto de quem entende do assunto.",
+  whatsapp: "5588999613191",
+  instagram: "https://www.instagram.com/leidiana_manicure1?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==",
+  cidade: "Acopiara, CE"
+};
+
+/* ------------------------- LISTA DE PRODUTOS -------------------------
+   Para adicionar um produto:
+   1. Salve a foto na pasta "imagens" (nome simples, sem espaço/acento).
+   2. Copie um bloco { ... } abaixo e cole antes do "];" no final.
+   3. Preencha nome, categoria, preco, descricao e imagem.
+   4. Salve o arquivo — o produto já aparece no site.
+   Para remover: apague o bloco inteiro. Para editar: troque o texto.
+   destaque: true mostra a etiqueta "Mais pedido"; false não mostra.
+   ----------------------------------------------------------------------- */
+const produtos = [
+  {
+    nome: "Egeo Blue",
+    categoria: "Perfumaria",
+    preco: 89.90,
+    descricao: "Desodorante colônia masculino, amadeirado e marcante. 90ml.",
+    imagem: "imagens/egeo-blue.jpg",
+    destaque: true
+  },
+  {
+    nome: "Lily Essence",
+    categoria: "Perfumaria",
+    preco: 200.00,
+    descricao: "Eau de parfum feminino floral, com toque adocicado e sofisticado. 75ml.",
+    imagem: "imagens/lily-essence.jpg",
+    destaque: false
+  },
+  {
+    nome: "Nativa SPA Óleo Vegetal Karité",
+    categoria: "Corpo e banho",
+    preco: 54.90,
+    descricao: "Óleo hidratante corporal com karité, deixa a pele macia e perfumada. 200ml.",
+    imagem: "imagens/nativa-spa-karite.jpg",
+    destaque: false
+  }
+];
+
+/* =========================================================================
+   PARTE 2 — MOTOR DO SITE (catálogo, carrinho, animações)
+   Não precisa editar daqui pra baixo.
+   ========================================================================= */
+
+(function () {
+  const grade = document.getElementById("grade-produtos");
+  const filtros = document.getElementById("filtros-categoria");
+  const vazio = document.getElementById("catalogo-vazio");
+  const contador = document.getElementById("contador-produtos");
+
+  const CHAVE_CARRINHO = "carrinho-boticario-da-tia";
+  let carrinho = carregarCarrinho();
+
+  function formatarPreco(valor) {
+    return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  }
+
+  function svgPlaceholder() {
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'>
+      <rect width='300' height='300' fill='#F3E4DC'/>
+      <g fill='none' stroke='#5C1A2E' stroke-width='4' opacity='0.55'>
+        <rect x='118' y='60' width='64' height='34' rx='6'/>
+        <path d='M132 94 L132 118 L108 150 L108 236 Q108 246 118 246 L182 246 Q192 246 192 236 L192 150 L168 118 L168 94' />
+      </g>
+    </svg>`;
+    return "data:image/svg+xml;base64," + btoa(svg);
+  }
+
+  function carregarCarrinho() {
+    try {
+      const salvo = localStorage.getItem(CHAVE_CARRINHO);
+      return salvo ? JSON.parse(salvo) : [];
+    } catch (erro) { return []; }
+  }
+
+  function salvarCarrinho() {
+    try { localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho)); }
+    catch (erro) { /* segue funcionando mesmo se o navegador bloquear */ }
+  }
+
+  function encontrarNoCarrinho(nome) {
+    return carrinho.find(function (item) { return item.nome === nome; });
+  }
+
+  function adicionarAoCarrinho(produto, quantidade) {
+    const existente = encontrarNoCarrinho(produto.nome);
+    if (existente) { existente.quantidade += quantidade; }
+    else { carrinho.push({ nome: produto.nome, preco: produto.preco, imagem: produto.imagem, quantidade: quantidade }); }
+    salvarCarrinho();
+    renderizarCarrinho(true);
+    abrirCarrinho();
+  }
+
+  function alterarQuantidadeCarrinho(nome, delta) {
+    const item = encontrarNoCarrinho(nome);
+    if (!item) return;
+    item.quantidade += delta;
+    if (item.quantidade <= 0) { carrinho = carrinho.filter(function (i) { return i.nome !== nome; }); }
+    salvarCarrinho();
+    renderizarCarrinho();
+  }
+
+  function removerDoCarrinho(nome) {
+    carrinho = carrinho.filter(function (i) { return i.nome !== nome; });
+    salvarCarrinho();
+    renderizarCarrinho();
+  }
+
+  function totalCarrinho() {
+    return carrinho.reduce(function (soma, item) { return soma + item.preco * item.quantidade; }, 0);
+  }
+
+  function quantidadeTotalCarrinho() {
+    return carrinho.reduce(function (soma, item) { return soma + item.quantidade; }, 0);
+  }
+
+  const painelCarrinho = document.getElementById("painel-carrinho");
+  const fundoCarrinho = document.getElementById("fundo-carrinho");
+  const listaCarrinho = document.getElementById("lista-carrinho");
+  const carrinhoVazio = document.getElementById("carrinho-vazio");
+  const totalCarrinhoEl = document.getElementById("total-carrinho");
+  const badgeCarrinho = document.getElementById("badge-carrinho");
+  const botaoAbrirCarrinho = document.getElementById("botao-carrinho");
+  const botaoFecharCarrinho = document.getElementById("fechar-carrinho");
+  const botaoFazerPedido = document.getElementById("botao-fazer-pedido");
+  const botaoLimparCarrinho = document.getElementById("limpar-carrinho");
+
+  function abrirCarrinho() {
+    painelCarrinho.classList.add("painel-carrinho--aberto");
+    fundoCarrinho.hidden = false;
+    requestAnimationFrame(function () { fundoCarrinho.classList.add("fundo-carrinho--visivel"); });
+    document.body.style.overflow = "hidden";
+  }
+
+  function fecharCarrinho() {
+    painelCarrinho.classList.remove("painel-carrinho--aberto");
+    fundoCarrinho.classList.remove("fundo-carrinho--visivel");
+    document.body.style.overflow = "";
+    setTimeout(function () { fundoCarrinho.hidden = true; }, 250);
+  }
+
+  function criarLinhaCarrinho(item) {
+    const linha = document.createElement("li");
+    linha.className = "item-carrinho";
+
+    const img = document.createElement("img");
+    img.src = item.imagem;
+    img.alt = item.nome;
+    img.onerror = function () { this.onerror = null; this.src = svgPlaceholder(); };
+
+    const info = document.createElement("div");
+    info.className = "item-carrinho__info";
+
+    const nome = document.createElement("p");
+    nome.className = "item-carrinho__nome";
+    nome.textContent = item.nome;
+
+    const preco = document.createElement("span");
+    preco.className = "item-carrinho__preco";
+    preco.textContent = formatarPreco(item.preco) + " cada";
+
+    const controles = document.createElement("div");
+    controles.className = "seletor-quantidade seletor-quantidade--pequeno";
+
+    const menos = document.createElement("button");
+    menos.type = "button";
+    menos.className = "seletor-quantidade__botao";
+    menos.setAttribute("aria-label", "Diminuir quantidade de " + item.nome);
+    menos.textContent = "–";
+    menos.addEventListener("click", function () { alterarQuantidadeCarrinho(item.nome, -1); });
+
+    const valor = document.createElement("span");
+    valor.className = "seletor-quantidade__valor";
+    valor.textContent = item.quantidade;
+
+    const mais = document.createElement("button");
+    mais.type = "button";
+    mais.className = "seletor-quantidade__botao";
+    mais.setAttribute("aria-label", "Aumentar quantidade de " + item.nome);
+    mais.textContent = "+";
+    mais.addEventListener("click", function () { alterarQuantidadeCarrinho(item.nome, 1); });
+
+    controles.appendChild(menos);
+    controles.appendChild(valor);
+    controles.appendChild(mais);
+
+    info.appendChild(nome);
+    info.appendChild(preco);
+    info.appendChild(controles);
+
+    const remover = document.createElement("button");
+    remover.type = "button";
+    remover.className = "item-carrinho__remover";
+    remover.setAttribute("aria-label", "Remover " + item.nome + " do carrinho");
+    remover.innerHTML = "&times;";
+    remover.addEventListener("click", function () { removerDoCarrinho(item.nome); });
+
+    const subtotal = document.createElement("span");
+    subtotal.className = "item-carrinho__subtotal";
+    subtotal.textContent = formatarPreco(item.preco * item.quantidade);
+
+    linha.appendChild(img);
+    linha.appendChild(info);
+    linha.appendChild(subtotal);
+    linha.appendChild(remover);
+    return linha;
+  }
+
+  function renderizarCarrinho(pulsar) {
+    listaCarrinho.innerHTML = "";
+    const qtd = quantidadeTotalCarrinho();
+
+    if (carrinho.length === 0) {
+      carrinhoVazio.hidden = false;
+      botaoFazerPedido.setAttribute("disabled", "disabled");
+      botaoLimparCarrinho.hidden = true;
+    } else {
+      carrinhoVazio.hidden = true;
+      botaoFazerPedido.removeAttribute("disabled");
+      botaoLimparCarrinho.hidden = false;
+      carrinho.forEach(function (item) { listaCarrinho.appendChild(criarLinhaCarrinho(item)); });
+    }
+
+    totalCarrinhoEl.textContent = formatarPreco(totalCarrinho());
+    badgeCarrinho.textContent = qtd;
+    badgeCarrinho.hidden = qtd === 0;
+
+    if (pulsar) {
+      badgeCarrinho.classList.remove("botao-carrinho__badge--pulso");
+      void badgeCarrinho.offsetWidth;
+      badgeCarrinho.classList.add("botao-carrinho__badge--pulso");
+    }
+
+    document.querySelectorAll(".card-produto").forEach(function (card) {
+      const nomeProduto = card.dataset.nome;
+      const item = encontrarNoCarrinho(nomeProduto);
+      const indicador = card.querySelector(".card-produto__no-carrinho");
+      if (indicador) {
+        indicador.hidden = !item;
+        if (item) indicador.textContent = item.quantidade + " no carrinho";
+      }
+    });
+  }
+
+  function montarMensagemPedido() {
+    const linhas = carrinho.map(function (item) {
+      return `• ${item.quantidade}x ${item.nome} — ${formatarPreco(item.preco * item.quantidade)}`;
+    });
+    return [`Olá! Quero fazer este pedido:`, ``, ...linhas, ``, `Total: ${formatarPreco(totalCarrinho())}`].join("\n");
+  }
+
+  function fazerPedido() {
+    if (carrinho.length === 0) return;
+    const mensagem = montarMensagemPedido();
+    window.open(`https://wa.me/${loja.whatsapp}?text=${encodeURIComponent(mensagem)}`, "_blank", "noopener");
+  }
+
+  botaoAbrirCarrinho.addEventListener("click", abrirCarrinho);
+  botaoFecharCarrinho.addEventListener("click", fecharCarrinho);
+  fundoCarrinho.addEventListener("click", fecharCarrinho);
+  botaoFazerPedido.addEventListener("click", fazerPedido);
+  botaoLimparCarrinho.addEventListener("click", function () {
+    carrinho = [];
+    salvarCarrinho();
+    renderizarCarrinho();
+  });
+  document.addEventListener("keydown", function (evento) { if (evento.key === "Escape") fecharCarrinho(); });
+
+  function criarCard(produto) {
+    const card = document.createElement("article");
+    card.className = "card-produto";
+    card.dataset.nome = produto.nome;
+
+    const figura = document.createElement("div");
+    figura.className = "card-produto__imagem";
+    const img = document.createElement("img");
+    img.src = produto.imagem;
+    img.alt = produto.nome;
+    img.loading = "lazy";
+    img.onerror = function () { this.onerror = null; this.src = svgPlaceholder(); this.classList.add("card-produto__imagem--placeholder"); };
+    figura.appendChild(img);
+
+    if (produto.destaque) {
+      const etiqueta = document.createElement("span");
+      etiqueta.className = "card-produto__etiqueta";
+      etiqueta.textContent = "Mais pedido";
+      figura.appendChild(etiqueta);
+    }
+
+    const corpo = document.createElement("div");
+    corpo.className = "card-produto__corpo";
+
+    const categoria = document.createElement("span");
+    categoria.className = "card-produto__categoria";
+    categoria.textContent = produto.categoria;
+
+    const nome = document.createElement("h3");
+    nome.className = "card-produto__nome";
+    nome.textContent = produto.nome;
+
+    const descricao = document.createElement("p");
+    descricao.className = "card-produto__descricao";
+    descricao.textContent = produto.descricao;
+
+    const preco = document.createElement("span");
+    preco.className = "card-produto__preco";
+    preco.textContent = formatarPreco(produto.preco);
+
+    const linhaAcao = document.createElement("div");
+    linhaAcao.className = "card-produto__acao";
+
+    const seletor = document.createElement("div");
+    seletor.className = "seletor-quantidade";
+
+    let quantidadeAtual = 1;
+
+    const menos = document.createElement("button");
+    menos.type = "button";
+    menos.className = "seletor-quantidade__botao";
+    menos.textContent = "–";
+    menos.setAttribute("aria-label", "Diminuir quantidade");
+
+    const valor = document.createElement("span");
+    valor.className = "seletor-quantidade__valor";
+    valor.textContent = quantidadeAtual;
+
+    const mais = document.createElement("button");
+    mais.type = "button";
+    mais.className = "seletor-quantidade__botao";
+    mais.textContent = "+";
+    mais.setAttribute("aria-label", "Aumentar quantidade");
+
+    menos.addEventListener("click", function () {
+      if (quantidadeAtual > 1) { quantidadeAtual -= 1; valor.textContent = quantidadeAtual; }
+    });
+    mais.addEventListener("click", function () { quantidadeAtual += 1; valor.textContent = quantidadeAtual; });
+
+    seletor.appendChild(menos);
+    seletor.appendChild(valor);
+    seletor.appendChild(mais);
+
+    const botaoAdicionar = document.createElement("button");
+    botaoAdicionar.type = "button";
+    botaoAdicionar.className = "botao botao--pequeno";
+    botaoAdicionar.textContent = "Adicionar";
+    botaoAdicionar.addEventListener("click", function () {
+      adicionarAoCarrinho(produto, quantidadeAtual);
+      const textoOriginal = botaoAdicionar.textContent;
+      botaoAdicionar.textContent = "Adicionado ✓";
+      setTimeout(function () { botaoAdicionar.textContent = textoOriginal; }, 900);
+      quantidadeAtual = 1;
+      valor.textContent = quantidadeAtual;
+    });
+
+    linhaAcao.appendChild(seletor);
+    linhaAcao.appendChild(botaoAdicionar);
+
+    const noCarrinho = document.createElement("span");
+    noCarrinho.className = "card-produto__no-carrinho";
+    noCarrinho.hidden = true;
+
+    corpo.appendChild(categoria);
+    corpo.appendChild(nome);
+    corpo.appendChild(descricao);
+    corpo.appendChild(preco);
+    corpo.appendChild(linhaAcao);
+    corpo.appendChild(noCarrinho);
+
+    card.appendChild(figura);
+    card.appendChild(corpo);
+    return card;
+  }
+
+  function renderizar(lista) {
+    grade.innerHTML = "";
+    if (lista.length === 0) { vazio.hidden = false; return; }
+    vazio.hidden = true;
+    lista.forEach(function (produto) { grade.appendChild(criarCard(produto)); });
+    renderizarCarrinho();
+  }
+
+  function montarFiltros() {
+    const categorias = Array.from(new Set(produtos.map(function (p) { return p.categoria; })));
+    if (categorias.length <= 1) { filtros.hidden = true; return; }
+    const botaoTodos = document.createElement("button");
+    botaoTodos.className = "filtro filtro--ativo";
+    botaoTodos.textContent = "Todos";
+    botaoTodos.dataset.categoria = "todos";
+    filtros.appendChild(botaoTodos);
+
+    categorias.forEach(function (categoria) {
+      const botao = document.createElement("button");
+      botao.className = "filtro";
+      botao.textContent = categoria;
+      botao.dataset.categoria = categoria;
+      filtros.appendChild(botao);
+    });
+
+    filtros.addEventListener("click", function (evento) {
+      const alvo = evento.target.closest(".filtro");
+      if (!alvo) return;
+      filtros.querySelectorAll(".filtro").forEach(function (b) { b.classList.remove("filtro--ativo"); });
+      alvo.classList.add("filtro--ativo");
+      const categoria = alvo.dataset.categoria;
+      const filtrados = categoria === "todos" ? produtos : produtos.filter(function (p) { return p.categoria === categoria; });
+      renderizar(filtrados);
+    });
+  }
+
+  function preencherDadosLoja() {
+    document.querySelectorAll("[data-loja-nome]").forEach(function (el) { el.textContent = loja.nome; });
+    document.querySelectorAll("[data-loja-frase]").forEach(function (el) { el.textContent = loja.frase; });
+    document.querySelectorAll("[data-loja-cidade]").forEach(function (el) { el.textContent = loja.cidade; });
+    document.querySelectorAll("[data-loja-whatsapp-link]").forEach(function (el) {
+      el.href = `https://wa.me/${loja.whatsapp}?text=${encodeURIComponent("Olá! Vim pelo site e quero saber mais sobre os perfumes.")}`;
+    });
+    document.querySelectorAll("[data-loja-instagram-link]").forEach(function (el) { el.href = loja.instagram; });
+    document.title = loja.nome + " — Perfumaria O Boticário";
+  }
+
+  preencherDadosLoja();
+  montarFiltros();
+  renderizar(produtos);
+  renderizarCarrinho();
+  if (contador) { contador.textContent = produtos.length; }
+})();
+</script>
+</body>
+</html>
